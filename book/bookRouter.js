@@ -1,5 +1,5 @@
-const bookController = require('../book/bookController')
-const book = require('../book/bookModel')
+const bookController = require('./bookController')
+const book = require('./bookModel')
 
 //Router file to handle all requests about the book model
 
