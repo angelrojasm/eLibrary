@@ -18,6 +18,7 @@
   "homepage": "https://github.com/angelrojasm/eLibrary#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "handlebars": "^4.5.3",
     "mongodb": "^3.3.4",
     "mongoose": "^5.7.12",
     "validator": "^12.1.0"
