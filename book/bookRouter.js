@@ -2,6 +2,8 @@ const bookController = require('../book/bookController')
 const book = require('../book/bookModel')
 const upload = require('../utils/filestorage/file-upload')
 const singleUpload = upload.single('book')
+const aws = require('aws-sdk')
+const config = require('../utils/filestorage/config')
 
 //Router file to handle all requests about the book model
 
@@ -17,6 +19,33 @@ singleUpload(req,res, function(err) {
     return res.json({'imageUrl': req.file.location})
 })
 })
+
+router.get('/getfile', (req,res) => {
+
+aws.config.setPromisesDependency()
+aws.config.update( {
+    accessKeyId: config.accessKeyID,
+    secretAccessKey: config.secretKey,
+    region: config.region
+})
+
+let s3 = new aws.S3()
+
+s3.getObject({
+    Bucket: config.bucket,
+    Key: 'libro.txt'
+}, (err,data) => {
+if(err) {
+    console.log(err)
+}
+else {
+    res.send(data.Body)
+}
+})
+
+   
+})
+
 
 router.post('/makebook', (req,res) => {
 
