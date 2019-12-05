@@ -64,8 +64,8 @@ class bookController {
     }
 
 //updates specific property of the book.
-    static update(query,callback) {
-            book.updateMany(query,{length: 2},(err,res) => {
+    static update(query,action,callback) {
+            book.updateMany(query,action,(err,res) => {
                 if(err) {
                     callback(err,null)
                 }

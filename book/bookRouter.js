@@ -1,5 +1,7 @@
 const bookController = require('../book/bookController')
 const book = require('../book/bookModel')
+const upload = require('../utils/filestorage/file-upload')
+const singleUpload = upload.single('book')
 
 //Router file to handle all requests about the book model
 
@@ -9,6 +11,12 @@ const express = require('express')
 const router = express.Router()
 
 //Creates a new book and subsequently updates the user list and the bookpacks list
+
+router.post('/upload', (req,res) => {
+singleUpload(req,res, function(err) {
+    return res.json({'imageUrl': req.file.location})
+})
+})
 
 router.post('/makebook', (req,res) => {
 
@@ -67,7 +75,8 @@ router.get('/getbooks',(req,res) =>{
 router.patch('/updatebook', (req,res) => {
 
     const query = req.body.Query
-    bookController.update(query,(err,updated) => {
+    const action = req.body.Action
+    bookController.update(query,action,(err,updated) => {
         if(err) {
         res.send(err)
         }
