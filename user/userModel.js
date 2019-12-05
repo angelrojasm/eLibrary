@@ -1,34 +1,27 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
+const mongoose = require('mongoose');
+const saltRounds = 10;
 
-//User Object Model Representation
+//Define a schema
 
- 
-const user = mongoose.model('User', {
-   
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        trim: true,
-        lowercase: true,
-       //Validates correct email format
-        validate(value) {
-            if(!validator.isEmail(value)) {
-                throw new Error("Email is invalid");
-                
-            }
-        }
-    },
-    password: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-})
-
-module.exports = user
-
+const UserSchema = new mongoose.Schema({
+ name: {
+  type: String,
+  trim: true,  
+  required: true,
+ },
+ email: {
+  type: String,
+  trim: true,
+  required: true
+ },
+ password: {
+  type: String,
+  trim: true,
+  required: true
+ }
+});
+// hash user password before saving into database
+UserSchema.pre('save', function(next){
+next();
+});
+module.exports = mongoose.model('User', UserSchema);
