@@ -15,6 +15,11 @@ MongoDB (Enterprise for windows)
 
 Postman
 
+React
+
+Bootstrap
+
+
 ### Running the tests
 
 First you have to register. After you have been registered, you may login and see the books available and read them. If you are an admin you may add or remove books, besides being able to read them. 
@@ -28,6 +33,9 @@ First you have to register. After you have been registered, you may login and se
 * [Json Web Token]
 * [Mongoose]
 * [BCrypt]
+* [React]
+* [ReactDOM]
+* [Bootstrap]
 
 
 
