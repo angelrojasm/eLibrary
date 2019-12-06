@@ -3,6 +3,7 @@ Main Express server application
 Utilizes all routers and repo function to interact with requests from Postman
 */ 
 const express = require('express') 
+const cors = require('cors')
 //initializes express server
 const app = express()
 //sets up localhost port for testing
@@ -14,7 +15,7 @@ const bookRouter = require('../book/bookRouter')
 
 //Parses all incoming JSON data into objects
 app.use(express.json())
-
+app.use(cors())
 app.use(userRouter)
 app.use(bookRouter)
 

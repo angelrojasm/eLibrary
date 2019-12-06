@@ -1,31 +1,94 @@
-const userModel = require('../user/userModel');
-const jwt = require('jsonwebtoken');
-module.exports = {
- create: function(req, res, next) {
-  
-  userModel.create({ name: req.body.name, email: req.body.email, password: req.body.password }, function (err, result) {
-      if (err) 
-       next(err);
-      else
-       res.json({status: "success", message: "User added successfully", data: null});
-      
-    });
- },
-authenticate: function(req, res, next) {
-  userModel.findOne({email:req.body.email}, function(err, userInfo){
-     if (err) {
-      next(err);
-     } else {
+const user = require('../user/userModel');
 
-if(req.body.password == userInfo.password) {
-//const token = jwt.sign({id: userInfo._id}, req.app.get('secretKey'), { expiresIn: '1h' });
-res.json({status:"success", message: "user found", data:{user: userInfo/*, token:token*/}});
-}else{
-res.json({status:"error", message: "Invalid email/password", data:null});
+
+//Repo class for all methods manipulating the user database
+class userController{
+
+//returns single user based on id
+
+    static findById(newUser,callback) {
+        
+
+            user.findById(newUser._id, (err,res) => {
+                if(err) {
+                    callback(err,null)
+                }
+                else {
+                    callback(null,res)
+                    
+                }
+
+            })
+
+    }
+
+//Verifies user credentials with database and returns validates previous registration
+
+    static login(query,callback) {
+        
+        
+            user.findOne(query, (err,res) => {
+                if(err) {
+                callback(err, null)
+            }
+            else {
+                callback(null,res)
+            }
+        })
+    }
+//Verifies user credentials with database and adds the new user to the db if there is no match
+    static register(newUser,callback) {
+
+        userController.login({"email": newUser.email}, (err,res) => {
+            if(err) {
+                callback(err,null)
+            }
+            if(res != null) {
+                callback(null, "That email is already registered in the database.")
+            }
+            else {
+               const usertoadd = new user(newUser)
+               if(usertoadd.email == 'Admin@gmail.com') {
+                  usertoadd.isAdmin = true;
+               }
+                usertoadd.save((err,res) => {
+                    if(err) {
+                        callback(err,null)
+                    }
+                    else {
+                        callback(null,res)
+                    }
+                })
+            }
+        })
+        
+    }
+//deletes as many users from db as fit the query
+    static delete(query,callback) {
+       
+            user.deleteMany(query, (err,res) => {
+                if(err) {
+                    callback(err,null)
+                }
+                else {
+                    callback(null,res)
+                }
+            })
+                  
+    }
+//updates specific property
+static update(query,callback) {
+    user.updateMany(query,{name: 'javier',updatedAt: new Date()}, (err,res) => {
+        if(err) {
+        callback(err,null)
+        }
+        else {
+        callback(null,res)
+        }
+    })
 }
-     }
-    });
- },
- 
- 
+
 }
+
+
+module.exports = userController

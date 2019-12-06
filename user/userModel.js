@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const saltRounds = 10;
+const validator = require('validator');
 
 //Define a schema
 
@@ -12,12 +12,22 @@ const UserSchema = new mongoose.Schema({
  email: {
   type: String,
   trim: true,
-  required: true
+  required: true,
+  validate(value) {
+    if(!validator.isEmail(value)) {
+        throw new Error("Email is invalid");
+    }
+}
+
  },
  password: {
   type: String,
   trim: true,
   required: true
+ },
+ isAdmin: {
+     type: Boolean,
+     default: false
  }
 });
 // hash user password before saving into database
