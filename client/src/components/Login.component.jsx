@@ -13,7 +13,7 @@ export default class Login extends Component {
         this.state = {
 
             email: '',
-            password: ''
+            password: '',
         }
     }
 
@@ -39,24 +39,14 @@ export default class Login extends Component {
         axios.post('http://localhost:3000/authenticate', newUser)
         .then(res => {
             console.log(res.data)
-            if(res.data.isAdmin === true) {
+            if(res.data.Rank === 'Admin') {
                 window.location = "/AdminPanel"
             }
+            if(res.data.Rank === 'User') {
+                window.location ="/UserPanel"
+            }
         });
-/*
-        fetch('/authenticate', {
-            method: "GET",
-            headers: {
-                accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
-            })
-        }).then(resp => resp.json() )
-    */
-        //window.location = "/login"
+
         this.setState({
             email: ''
         })
@@ -66,6 +56,7 @@ export default class Login extends Component {
     }
 
     render() {
+
         return (
             <div>
                <h3>Log in with your user credentials!</h3>

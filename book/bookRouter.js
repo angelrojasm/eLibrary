@@ -18,7 +18,8 @@ router.post('/uploadfile', (req,res) => {
   upload.sign_s3(req,res)
 })
 
-router.get('/getfile', (req,res) => {
+router.get('/getfile/:name', (req,res) => {
+    const book = req.params.name
 
 aws.config.setPromisesDependency()
 aws.config.update( {
@@ -32,10 +33,10 @@ let s3 = new aws.S3()
 
 s3.getObject({
     Bucket: config.bucket,
-    Key: req.body.name
+    Key: book
 }, (err,data) => {
 if(err) {
-    res.send('The book file does not exist!')
+    res.send('The book does not have a text file with the same name. Please upload one.')
 }
 else {
     res.send(data.Body)
@@ -85,9 +86,9 @@ router.post('/makebook', (req,res) => {
 
 //deletes an book and subsequently updates the user list and the bookpacks list
 
-router.post('/deletebooks', (req,res) => {
-const query = req.body
-    bookController.delete(query, (err, deleted) => {
+router.delete('/deletebook/:id', (req,res) => {
+const query = req.params.id
+    bookController.delete({_id: query}, (err, deleted) => {
         if(err) {
             res.send(err)
         }
@@ -111,9 +112,19 @@ router.get('/getbook', (req,res) => {
 
 })
 
-
-router.get('/getbooks',(req,res) =>{
+    router.get('/getbooks',(req,res) =>{
     bookController.find((err,result) => {
+    if(err) {
+    res.send(err)
+    }
+    else { 
+        res.send(result)}
+    })
+})
+
+router.get('/findbooks/:id',(req,res) =>{
+    const query = req.params.id
+    bookController.find2(query,(err,result) => {
     if(err) {
     res.send(err)
     }

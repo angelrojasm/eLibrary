@@ -49,7 +49,7 @@ class userController{
             else {
                const usertoadd = new user(newUser)
                if(usertoadd.email == 'Admin@gmail.com') {
-                  usertoadd.isAdmin = true;
+                  usertoadd.Rank = 'Admin'
                }
                 usertoadd.save((err,res) => {
                     if(err) {

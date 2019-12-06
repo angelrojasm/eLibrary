@@ -17,12 +17,6 @@ render() {
                 <Link to="/create" className ="nav-link">Create Book</Link>
                 </li>
                 <li className="navbar-item">
-                 <Link to="/delete" className="nav-link">Delete Book</Link>   
-                </li>
-                <li className="navbar-item">
-                 <Link to="/edit" className="nav-link">Edit Book</Link>   
-                </li>
-                <li className="navbar-item">
                  <Link to="/upload" className="nav-link">Upload File</Link>   
                 </li>
             </ul>

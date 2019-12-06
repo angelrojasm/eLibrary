@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 import Authentication from "./components/AuthenticationPanel.component.jsx"
 import AdminPanel from "./components/AdminPanel.component.jsx"
+import UserPanel from "./components/UserPanel.component.jsx"
 
 
 function App() {
@@ -11,18 +12,8 @@ function App() {
     <Router>
       <Route path="/" exact component ={Authentication} />
       <Route path ="/AdminPanel" component =  {AdminPanel} />
+      <Route path="/UserPanel" exact component = {UserPanel}/>
     </Router>
-/*
-    <Router>
-      <Navbar /> 
-      <br/> 
-    <Route path="/" exact component={BookList}  />
-    <Route path="/edit" component={EditBook}  />
-    <Route path="/upload" component={UploadFile}  />
-    <Route path="/create" exact component={CreateBook}  />
-    <Route path="/delete" exact component={DeleteBook}  />
-    </Router> 
-*/
   );
 }
 

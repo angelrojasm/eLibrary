@@ -36,6 +36,20 @@ class bookController {
         })
     }
 
+    static find2(query,callback) {
+        
+        
+        book.findById(query, (err,res) => {
+            if(err) {
+            callback(err, null)
+        }
+        else {
+            callback(null,res)
+        }
+    })
+}
+
+
 //saves a new book to db
     static addBook(newbook,callback) {
 
@@ -52,7 +66,7 @@ class bookController {
 //deletes as many books from db as fit the query
     static delete(query,callback) {
        
-            book.deleteMany(query, (err,res) => {
+            book.deleteOne(query, (err,res) => {
                 if(err) {
                     callback(err,null)
                 }

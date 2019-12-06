@@ -25,9 +25,11 @@ const UserSchema = new mongoose.Schema({
   trim: true,
   required: true
  },
- isAdmin: {
-     type: Boolean,
-     default: false
+
+ Rank: {
+    type: String,
+    enum : ['User', 'Admin'],
+    default: 'User'
  }
 });
 // hash user password before saving into database
