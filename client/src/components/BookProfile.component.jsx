@@ -19,7 +19,7 @@ export default class BookProfile extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3000/findbooks/' + this.props.match.params.id)
+        axios.get('http://localhost:3001/findbooks/' + this.props.match.params.id)
           .then(response => {
             this.setState({
                 name: response.data.name,
@@ -34,7 +34,7 @@ export default class BookProfile extends Component {
     }
 
     deleteBook() {
-        axios.delete('http://localhost:3000/deletebook/' + this.props.match.params.id)
+        axios.delete('http://localhost:3001/deletebook/' + this.props.match.params.id)
           .then(response => {console.log(response.data) });
 
         //Take user to book collection
@@ -44,7 +44,7 @@ export default class BookProfile extends Component {
     editBook() {
     }
     readBook() {
-        axios.get('http://localhost:3000/getfile/' + this.state.name)
+        axios.get('http://localhost:3001/getfile/' + this.state.name)
           .then(response => { 
             this.setState({
                 booktext: response.data

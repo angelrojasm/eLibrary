@@ -25,7 +25,7 @@ class UploadFile extends Component {
     let fileName = fileParts[0];
     let fileType = fileParts[1];
     console.log("Preparing the upload");
-    axios.post("http://localhost:3000/uploadfile",{
+    axios.post("http://localhost:3001/uploadfile",{
       fileName : fileName,
       fileType : fileType
     }) 

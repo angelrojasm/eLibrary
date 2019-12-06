@@ -18,7 +18,7 @@ export default class UserBookProfile extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3000/findbooks/' + this.props.match.params.id)
+        axios.get('http://localhost:3001/findbooks/' + this.props.match.params.id)
           .then(response => {
             this.setState({
                 name: response.data.name,
@@ -33,7 +33,7 @@ export default class UserBookProfile extends Component {
     }
 
     readBook() {
-        axios.get('http://localhost:3000/getfile/' + this.state.name)
+        axios.get('http://localhost:3001/getfile/' + this.state.name)
           .then(response => {  
             this.setState({
             booktext: response.data

@@ -36,7 +36,7 @@ export default class Login extends Component {
             password: this.state.password
         }
 
-        axios.post('http://localhost:3000/authenticate', newUser)
+        axios.post('http://localhost:3001/authenticate', newUser)
         .then(res => {
             console.log(res.data)
             if(res.data.Rank === 'Admin') {

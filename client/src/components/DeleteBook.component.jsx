@@ -28,7 +28,7 @@ export default class DeleteBook extends Component {
        
 
         e.preventDefault()
-        axios.post('http://localhost:3000/deletebooks',book).then(res => console.log(res.data));
+        axios.post('http://localhost:3001/deletebooks',book).then(res => console.log(res.data));
         //window.location = "/"
     }
  

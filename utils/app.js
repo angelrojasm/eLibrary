@@ -7,7 +7,7 @@ const cors = require('cors')
 //initializes express server
 const app = express()
 //sets up localhost port for testing
-const port = 3000
+const port = 3001
 
 //Implements all router handlers in server
 const userRouter = require('../user/userRouter')
